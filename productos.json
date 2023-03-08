@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "Product 1",
+    "description": "Description for product 1",
+    "price": 55,
+    "thumbnail": "https://via.placeholder.com/150x150?text=Product1",
+    "code": "CODE1",
+    "stock": 69
+  },
+  {
+    "id": 2,
+    "title": "Product 2",
+    "description": "Description for product 2",
+    "price": 49,
+    "thumbnail": "https://via.placeholder.com/150x150?text=Product2",
+    "code": "CODE2",
+    "stock": 64
+  },
+  {
+    "id": 3,
+    "title": "Product 3",
+    "description": "Description for product 3",
+    "price": 12,
+    "thumbnail": "https://via.placeholder.com/150x150?text=Product3",
+    "code": "CODE3",
+    "stock": 6
+  },
+  {
+    "id": 4,
+    "title": "Product 4",
+    "description": "Description for product 4",
+    "price": 25,
+    "thumbnail": "https://via.placeholder.com/150x150?text=Product4",
+    "code": "CODE4",
+    "stock": 70
+  },
+  {
+    "id": 5,
+    "title": "Product 5",
+    "description": "Description for product 5",
+    "price": 33,
+    "thumbnail": "https://via.placeholder.com/150x150?text=Product5",
+    "code": "CODE5",
+    "stock": 15
+  },
+  {
+    "id": 6,
+    "title": "Product 6",
+    "description": "Description for product 6",
+    "price": 65,
+    "thumbnail": "https://via.placeholder.com/150x150?text=Product6",
+    "code": "CODE6",
+    "stock": 51
+  },
+  {
+    "id": 7,
+    "title": "Product 7",
+    "description": "Description for product 7",
+    "price": 7,
+    "thumbnail": "https://via.placeholder.com/150x150?text=Product7",
+    "code": "CODE7",
+    "stock": 8
+  },
+  {
+    "id": 8,
+    "title": "Product 8",
+    "description": "Description for product 8",
+    "price": 66,
+    "thumbnail": "https://via.placeholder.com/150x150?text=Product8",
+    "code": "CODE8",
+    "stock": 17
+  },
+  {
+    "id": 9,
+    "title": "Product 9",
+    "description": "Description for product 9",
+    "price": 26,
+    "thumbnail": "https://via.placeholder.com/150x150?text=Product9",
+    "code": "CODE9",
+    "stock": 99
+  },
+  {
+    "id": 10,
+    "title": "Product 10",
+    "description": "Description for product 10",
+    "price": 74,
+    "thumbnail": "https://via.placeholder.com/150x150?text=Product10",
+    "code": "CODE10",
+    "stock": 85
+  }
+]
