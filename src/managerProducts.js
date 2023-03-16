@@ -1,6 +1,6 @@
-const fs = require('fs')
+import fs  from 'fs'
 
-class ProductManager {
+export class ProductManager {
   constructor(path) {
     this.path = path
     try {
@@ -91,7 +91,7 @@ class ProductManager {
 }
 
 
-const productManager = new ProductManager('./productos.json')
+/*const productManager = new ProductManager('./productos.json')
 
 for (let i = 1; i <= 10; i++) {
   const newProduct = {
@@ -104,8 +104,6 @@ for (let i = 1; i <= 10; i++) {
   }
 
   productManager.addProduct(newProduct)
-}
+}*/
 
 console.log('Products created successfully')
-
-module.exports = ProductManager
