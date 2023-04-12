@@ -1,17 +1,32 @@
 import express from 'express';
+import __dirname from './util.js'
 import cartsRouter from './routes/carts.router.js'
 import productRouter from './routes/products.router.js'
+import messagesRouter from './routes/messages.router.js'
+import handlebars from 'express-handlebars'
+import { Server } from 'socket.io'
+import './db/dbConfig.js'
 
 const app = express();
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
+//Archivos estaticos
+app.use(express.static(__dirname+'/public'))
+
 // Se instancia la clase ProductManager con la ruta del archivo de productos
 
 app.use('/products', productRouter)
 app.use('/carts', cartsRouter)
+app.use('/chat', messagesRouter)
 
+
+
+//Configuracion motor de plantillas
+app.engine('handlebars', handlebars.engine())
+app.set('views', __dirname+'/views')
+app.set('view engine', 'handlebars')
 
 //const productManager = new ProductManager('./productos.json');
 
@@ -19,4 +34,32 @@ app.use('/carts', cartsRouter)
 
 // Se inicia el servidor
 const PORT = 8080;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+const httpServer = app.listen(PORT, ()=> {
+    console.log(`Escuchando al puerto ${PORT}`)
+})
+
+//Websocket
+const infoMensajes = []
+const socketServer = new Server(httpServer)
+
+socketServer.on('connection', socket => {
+    console.log(`Usuario conectado: ${socket.id}`)
+
+
+socket.on('disconnect', ()=>{
+    console.log(`Usuario desconectado: ${socket.id}`)
+})
+
+socket.on('mensaje', info=>{
+    infoMensajes.push(info)
+    // console.log(infoMensajes)
+    socketServer.emit('chat', infoMensajes)
+    })
+
+socket.on('usuarioNuevo', usuario=>{
+        socket.broadcast.emit('broadcast', usuario)
+    })
+
+})

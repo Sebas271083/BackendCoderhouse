@@ -11,7 +11,7 @@ export class ProductManager {
     }
   }
 
-  getProducts() {
+  getAllProducts() {
     return this.products
   }
 
