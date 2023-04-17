@@ -3,7 +3,7 @@ import {productsModel} from '../db/models/products.mode.js'
 export class ProductManager {
     async getAllProducts() {
         try {
-            const products = await productsModel.find()
+            const products = await productsModel.find().lean()
             return products;
           } catch (error) {
                 console.log(error)

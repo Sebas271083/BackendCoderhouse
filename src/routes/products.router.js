@@ -10,12 +10,12 @@ const productManager = new ProductManager(__dirname+'../../productos.json')
 
 router.get('/', async (req, res) => {
     try {
-      const {title, limit, page, sort } = req.query
-      const products = await productManager.getAllProducts(title, limit, page, sort);
-      res.json(products);
+      const products = await productManager.getAllProducts();
+      res.render('products', {products});
+      console.log(products)
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Internal server error' });
+      res.json(500).json({ message: 'Internal server error' });
     }
   });
 

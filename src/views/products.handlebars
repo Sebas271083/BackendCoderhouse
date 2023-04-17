@@ -1,0 +1,24 @@
+
+
+<h1 class="text-center mb-4 mt-3" style="color: #333;">Productos</h1>
+
+<div class="row">
+  {{#each products}}
+    <div class=" col-md-4">
+      <div class="card mb-4 shadow-lg ml-3" style="border: none;">
+        <div class="card-body">
+          <h5 class="card-title text-center mb-3" style="color: #333;">{{title}}</h5>
+          <p class="card-text" style="color: #555;">{{description}}</p>
+          <p class="card-text" style="color: #555;">Precio: ${{price}}</p>
+          <p class="card-text" style="color: #555;">Stock: {{stock}}</p>
+          <a href="#" class="btn btn-primary col-12">Comprar</a>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>
+
+
+
+
+
