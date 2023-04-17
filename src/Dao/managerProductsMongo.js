@@ -4,11 +4,39 @@ export class ProductManager {
     async getAllProducts() {
         try {
             const products = await productsModel.find()
-                return products
+            return products;
           } catch (error) {
                 console.log(error)
           }
     }
+
+    async getPaginate(query, limit, page, sort) {
+      try {
+          const products = await productsModel.paginate({},{limit:limit, page:page})
+
+          console.log(products, "products")
+
+          const info= {
+            count: products.totalDocs,
+            page: products.totalPages,
+            next: products.hasNextPage ? `http://localhost:8080/products/paginate?page=${products.nextPage}` : null,
+            prev: products.hasPrevPage ? `http://localhost:8080/products/paginate?page=${products.prevPage}` : null
+
+          }
+
+          if (sort === 'asc') {
+            products.docs.sort((a, b) => a.price - b.price);
+        } else if (sort === 'desc') {
+            products.docs.sort((a, b) => b.price - a.price);
+        }
+
+          return {info, products: products.docs};
+        } catch (error) {
+              console.log(error)
+        }
+  }
+
+
 
     async getProductById(id) {
         const product = await productsModel.findById(id);

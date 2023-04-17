@@ -10,22 +10,32 @@ const productManager = new ProductManager(__dirname+'../../productos.json')
 
 router.get('/', async (req, res) => {
     try {
-      const products = await productManager.getAllProducts();
-      let limit = req.query.limit; // Se obtiene el query param limit
-      if (limit) {
-        products.splice(limit); // Si se recibe un límite, se devuelve sólo el número de productos solicitados
-      }
+      const {title, limit, page, sort } = req.query
+      const products = await productManager.getAllProducts(title, limit, page, sort);
       res.json(products);
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal server error' });
     }
   });
+
+
+  
+router.get('/paginate', async (req, res) => {
+  try {
+    const {title, limit, page, sort } = req.query
+    const products = await productManager.getPaginate(title, limit, page, sort);
+    res.json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
   
 
   router.post('/', async(req, res) => {
     const newproduct = await productManager.addProduct(req.body)
-    res.json({message: 'Student created', product: newproduct})
+    res.json({message: 'Product created', product: newproduct})
   })
 
   
