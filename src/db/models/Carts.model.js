@@ -6,4 +6,4 @@ const cartsSchema = new Schema({
     }
 })
 
-export const cartsModel = mongoose.model('students', cartsSchema)
+export const cartsModel = mongoose.model('carts', cartsSchema)

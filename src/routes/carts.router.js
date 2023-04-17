@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
 //Buscar un carrito
 router.get('/:idCart', async (req, res) => {
     const {idCart} = req.params
-    const cart = await managerCart.getCart(+idCart)
+    const cart = await managerCart.getCart(idCart)
     res.json({cart})
 })
 
@@ -24,8 +24,16 @@ router.get('/:idCart', async (req, res) => {
 //Agregar un producto a un carrito
 router.post('/:idCart/product/:idProduct', async (req, res) => {
 const {idCart, idProduct} = req.params
-const addProduct = await managerCart.addProductToCart(+idCart, +idProduct)
+const addProduct = await managerCart.addProductToCart(idCart, idProduct)
 res.json({message:addProduct})
+})
+
+//Eliminar del carrito el producto seleccionado
+
+router.delete(' /:cid/products/:pid', async(req, res) => {
+    const {pid} = req.params
+    const productDelete = await managerCart.deleteProduct(pid)
+    res.json({message:productDelete})
 })
 
 
