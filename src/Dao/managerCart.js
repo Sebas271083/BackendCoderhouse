@@ -18,7 +18,7 @@ export class ManagerCart {
 
     async getCart(id) {
         try {
-          const cart = await cartsModel.findOne({ _id: id });
+          const cart = await cartsModel.findOne({ _id: id }).populate('product');
           return cart;
         } catch (error) {
           console.error(error);
@@ -29,24 +29,25 @@ export class ManagerCart {
 
 async createCart() {
   const newCart = await cartsModel.create({
-    products: []
   });
   return newCart;
 }
 
 async addProductToCart(idCart, idProduct) {
-    const cart = await cartsModel.findOne({ _id: idCart });
-    if (!cart) return 'Cart does not found';
-    const productIndex = cart.products.findIndex(p => p.product === idProduct);
-    if (productIndex === -1) {
-      cart.products.push({ product: idProduct, quantity: 1 });
-    } else {
-      cart.products[productIndex].quantity++;
-    }
-    await cart.save();
-    return 'product added';
+  const cart = await cartsModel.findOne({ _id: idCart });
+  if (!cart) return 'Cart not found';
+  const productIndex = cart.product.findIndex(p => p.toString() === idProduct);
+  if (productIndex === -1) {
+    cart.product.push(idProduct);
+  } else {
+    cart.product[productIndex] = idProduct;
   }
+  await cart.save();
+  return 'Product added to cart';
+}
 
+
+  
 
   async deleteProduct(pid) {
     try {
