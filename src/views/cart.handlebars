@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito de compras</title>
-</head>
-<body>
-    <h1>Carrito de compras</h1>
-    <ul>
-        {{#each }}
-            <li>{{}} - ${{}}</li>
-        {{/each}}
-    </ul>
-    <h2>Total: ${{}}</h2>
-</body>
-</html>
+<div class="container">
+        <h1 class="my-4 text-center">Carrito de compras</h1>
+        <div class="row">
+            {{#each cart.product}}
+            <div class="col-md-6">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{this.title}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted text-right">Precio: ${{this.price}}</h6>
+                        <p class="card-text">Descripcion: {{this.description}}</p>
+                        <p class="card-text">Stock: {{this.stock}}</p>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>

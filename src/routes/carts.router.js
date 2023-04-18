@@ -14,10 +14,19 @@ router.post('/', async (req, res) => {
 })
 
 //Buscar un carrito
+router.get('/', async (req, res) => {
+    const cart = await managerCart.getCarts()
+    res.json({cart})
+})
+
+
+//Buscar un carrito
 router.get('/:idCart', async (req, res) => {
     const {idCart} = req.params
     const cart = await managerCart.getCart(idCart)
-    res.json({cart})
+    console.log(cart)
+    res.render('cart',{cart})
+    // res.json({cart})
 })
 
 

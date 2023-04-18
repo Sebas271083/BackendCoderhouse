@@ -8,7 +8,7 @@ export class ManagerCart {
 
     async getCarts() {
         try {
-            const carts = await cartsModel.find({})
+            const carts = await cartsModel.find().populate('product')
             return carts
         } catch (err) {
             console.log(err)
@@ -18,7 +18,7 @@ export class ManagerCart {
 
     async getCart(id) {
         try {
-          const cart = await cartsModel.findOne({ _id: id }).populate('product');
+          const cart = await cartsModel.findOne({ _id: id }).populate('product').lean();
           return cart;
         } catch (error) {
           console.error(error);
@@ -46,8 +46,6 @@ async addProductToCart(idCart, idProduct) {
   return 'Product added to cart';
 }
 
-
-  
 
   async deleteProduct(pid) {
     try {
