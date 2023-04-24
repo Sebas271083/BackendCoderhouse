@@ -3,6 +3,9 @@ import __dirname from './util.js'
 import cartsRouter from './routes/carts.router.js'
 import productRouter from './routes/products.router.js'
 import messagesRouter from './routes/messages.router.js'
+import loginRouter from './routes/login.router.js'
+import session from 'express-session'
+import MongoStore from 'connect-mongo';
 import handlebars from 'express-handlebars'
 import { Server } from 'socket.io'
 import './db/dbConfig.js'
@@ -15,11 +18,26 @@ app.use(express.urlencoded({extended:true}))
 //Archivos estaticos
 app.use(express.static(__dirname+'/public'))
 
+
+//Configurar session
+app.use(session({
+    store: MongoStore.create({
+        mongoUrl:'mongodb+srv://sebas:sebas@cluster0.hzzhv.mongodb.net/ecommerce?retryWrites=true&w=majority',
+        mongoOptions:{useNewUrlParser:true, useUnifiedTopology:true},
+        ttl: 1500, 
+  }),
+  secret:"claveSecreta",
+  resave:false,
+  saveUninitialized:false
+}))
+
 // Se instancia la clase ProductManager con la ruta del archivo de productos
 
 app.use('/products', productRouter)
 app.use('/carts', cartsRouter)
 app.use('/chat', messagesRouter)
+app.use('/login', loginRouter)
+
 
 
 

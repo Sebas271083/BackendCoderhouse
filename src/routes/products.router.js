@@ -2,16 +2,27 @@ import {Router} from 'express'
 // import {ProductManager} from '../managerProducts.js';
 import {ProductManager} from "../Dao/managerProductsMongo.js"
 import  __dirname  from "../util.js";
+import session from 'express-session';
+
+
 
 
 const router = Router()
+
+router.use(session({
+  secret: 'claveSecreta',
+  resave: false,
+  saveUninitialized: true,
+}));
 
 const productManager = new ProductManager(__dirname+'../../productos.json')
 
 router.get('/', async (req, res) => {
     try {
+      const email = req.session.email
+      console.log(req.session.email + "session")
       const products = await productManager.getAllProducts();
-      res.render('products', {products});
+      res.render('products', {products, email, layout: 'main'});
       console.log(products)
     } catch (error) {
       console.error(error);

@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="form-container">
+    <h1 class="form-heading">Crear Usuario</h1>
+    <form action="/login/signup" method="POST" class="form">
+      <div class="form-group">
+        <label for="email" class="form-label">Correo electrónico:</label>
+        <input type="email" name="email" id="email" class="form-input" required>
+      </div>
+      <div class="form-group">
+        <label for="password" class="form-label">Contraseña:</label>
+        <input type="password" name="password" id="password" class="form-input" required>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="form-button">Crear</button>
+      </div>
+      <div class="text-center">
+        <p>Ya tienes cuenta? <a class="text-center" href="/login">Inicia Sesión</a></p>
+      </div>
+    </form>
+  </div>
+</div>
