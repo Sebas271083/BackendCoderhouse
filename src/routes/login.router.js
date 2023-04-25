@@ -44,14 +44,19 @@ router.get('/signup', (req, res)=>{
     res.render('signup')
 } )
 
-router.post('/signup', async(req, res)=>{
-    const user = req.body
-    const hashPassword= await hasData(user.password)
-    const newUser = {...user, password:hashPassword}
-    await UsersModel.create(newUser)
-    res.send('Usuario creado')
+// router.post('/signup', async(req, res)=>{
+//     const user = req.body
+//     const hashPassword= await hasData(user.password)
+//     const newUser = {...user, password:hashPassword}
+//     await UsersModel.create(newUser)
+//     res.send('Usuario creado')
 
-} )
+// } )
+
+
+router.post('/signup', passport.authenticate('signup'), (req, res)=> {
+    res.send('User Create')
+})
 
 
 router.get('/bienvenida', (req, res) => {
