@@ -1,17 +1,18 @@
 <div class="container">
-        <h1 class="my-4 text-center">Carrito de compras</h1>
-        <div class="row">
-            {{#each cart.product}}
-            <div class="col-md-6">
-                <div class="card mb-4 box-shadow">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">{{this.title}}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted text-right">Precio: ${{this.price}}</h6>
-                        <p class="card-text">Descripcion: {{this.description}}</p>
-                        <p class="card-text">Stock: {{this.stock}}</p>
-                    </div>
+    <h1 class="my-4 text-center">Carrito de compras</h1>
+    <div class="row">
+        {{#each cart.product}}
+        <div class="col-md-6">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{this.title}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted text-right">Precio: ${{this.price}}</h6>
+                    <p class="card-text">Descripcion: {{this.description}}</p>
+                    <p class="card-text">Stock: {{this.stock}}</p>
+                    <button class="btn btn-danger btn-sm delete-product" data-id="{{this._id}}">Eliminar</button>
                 </div>
             </div>
-            {{/each}}
         </div>
+        {{/each}}
     </div>
+</div>

@@ -8,6 +8,8 @@ import session from 'express-session'
 import MongoStore from 'connect-mongo';
 import handlebars from 'express-handlebars'
 import { Server } from 'socket.io'
+import passport from 'passport';
+import './passport/pasportStrategies.js'
 import './db/dbConfig.js'
 
 const app = express();
@@ -17,6 +19,9 @@ app.use(express.urlencoded({extended:true}))
 
 //Archivos estaticos
 app.use(express.static(__dirname+'/public'))
+
+
+//Configurar Passport
 
 
 //Configurar session
@@ -30,6 +35,9 @@ app.use(session({
   resave:false,
   saveUninitialized:false
 }))
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 // Se instancia la clase ProductManager con la ruta del archivo de productos
 
