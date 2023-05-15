@@ -7,12 +7,12 @@
         <input type="email" name="email" id="email" class="form-input" required>
       </div>
       <div class="form-group">
-        <label for="nombre" class="form-label">Nombre:</label>
-        <input type="nombre" name="nombre" id="nombre" class="form-input" required>
+        <label for="first_name" class="form-label">Nombre:</label>
+        <input type="text" name="first_name" id="first_name" class="form-input" required>
       </div>
       <div class="form-group">
-        <label for="apellido" class="form-label">Apellido:</label>
-        <input type="apellido" name="apellido" id="apellido" class="form-input" required>
+        <label for="last_name" class="form-label">Apellido:</label>
+        <input type="text" name="last_name" id="last_name" class="form-input" required>
       </div>
       <div class="form-group">
         <label for="password" class="form-label">Contraseña:</label>
@@ -25,5 +25,12 @@
         <p>Ya tienes cuenta? <a class="text-center" href="/login">Inicia Sesión</a></p>
       </div>
     </form>
+    <div class="d-grid gap-2 col-12 mx-auto">
+      <h2 class="text-center">SIGNUP WITH GITHUB</h2>
+      <div class="d-grid gap-2 col-12 mx-auto text-center">
+        <button onclick="location.href='/login/signupGithub'" class="btn-success">GITHUB</button>
+      </div>
+    </div>
   </div>
+
 </div>

@@ -15,23 +15,6 @@ router.get('/', (req, res)=>{
     res.render('login')
 })
 
-// router.post('/', async (req, res) => {
-//     const { email, password } = req.body
-//     const user = await UsersModel.findOne({email})
-//     if(!user){
-//         return res.json({message: 'User not found'})
-//     }
-//     const isPassword = await compareData(password, user.password)
-//     if(!isPassword) {
-//         return res.json({message: 'Contraseña icorrecta'})
-//     }
-
-//     req.session['email'] = email
-//     req.session['password'] = password
-//     req.session['logged'] = true
-//     res.redirect('/products')
-// })
-
 router.post('/', passport.authenticate('local'), (req, res)=>{
     const { email, password } = req.body
     req.session['email'] = email
@@ -44,18 +27,12 @@ router.get('/signup', (req, res)=>{
     res.render('signup')
 } )
 
-// router.post('/signup', async(req, res)=>{
-//     const user = req.body
-//     const hashPassword= await hasData(user.password)
-//     const newUser = {...user, password:hashPassword}
-//     await UsersModel.create(newUser)
-//     res.send('Usuario creado')
 
-// } )
+router.post('/signup', passport.authenticate('signup',{successRedirect:'./signupSucc'}))
 
-
-router.post('/signup', passport.authenticate('signup'), (req, res)=> {
-    res.send('User Create')
+router.get('/signupGithub', passport.authenticate('github', {scope: ['user:email']}))
+router.get('/github', passport.authenticate('github'), (req, res) => {
+ res.send('USER BY GITHUB')   
 })
 
 
@@ -65,6 +42,10 @@ router.get('/bienvenida', (req, res) => {
         return 
     }
     res.redirect('/')
+})
+
+router.get('/signupSucc', (req, res) => {
+    res.render('signupSucc')
 })
 
 
