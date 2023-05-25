@@ -10,7 +10,7 @@ import handlebars from 'express-handlebars'
 import { Server } from 'socket.io'
 import passport from 'passport';
 import './passport/pasportStrategies.js'
-import './db/dbConfig.js'
+import './DAL/db/dbConfig.js'
 
 const app = express();
 

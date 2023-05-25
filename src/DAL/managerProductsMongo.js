@@ -1,4 +1,4 @@
-import {productsModel} from '../db/models/products.mode.js'
+import {productsModel} from '../DAL/db/models/products.mode.js'
 
 export class ProductManager {
     async getAllProducts() {

@@ -1,4 +1,4 @@
-import {cartsModel} from '../db/models/Carts.model.js'
+import {cartsModel} from '../DAL/db/models/Carts.model.js'
 
 
 export class ManagerCart {
@@ -8,7 +8,7 @@ export class ManagerCart {
 
     async getCarts() {
         try {
-            const carts = await cartsModel.find().populate('product')
+            const carts = await cartsModel.find().populate('product').populate('user')
             return carts
         } catch (err) {
             console.log(err)
@@ -33,12 +33,13 @@ async createCart() {
   return newCart;
 }
 
-async addProductToCart(idCart, idProduct) {
+async addProductToCart(idCart, idProduct, idUser) {
   const cart = await cartsModel.findOne({ _id: idCart });
   if (!cart) return 'Cart not found';
   const productIndex = cart.product.findIndex(p => p.toString() === idProduct);
   if (productIndex === -1) {
     cart.product.push(idProduct);
+    cart.user = idUser
   } else {
     cart.product[productIndex] = idProduct;
   }
@@ -56,7 +57,4 @@ async addProductToCart(idCart, idProduct) {
       return 'error deleting product'
     }
   }
-  
-
-
 }

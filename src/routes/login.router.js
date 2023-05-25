@@ -1,5 +1,5 @@
 import { Router } from "express";
-import UsersModel from "../db/models/Users.model.js"
+import UsersModel from "../DAL/db/models/Users.model.js"
 import { hasData, compareData } from "../util.js";
 import passport from "passport";
 
@@ -35,6 +35,14 @@ router.get('/github', passport.authenticate('github'), (req, res) => {
  res.send('USER BY GITHUB')   
 })
 
+
+//GOOGLE
+router.get('/google', passport.authenticate('googleSignUp', { scope: ['profile', 'email']
+}))
+
+router.get('/googleCallback', passport.authenticate('googleSignUp'), (req, res)=> {
+    res.send(req.user)
+})
 
 router.get('/bienvenida', (req, res) => {
     if(req.session?.email){

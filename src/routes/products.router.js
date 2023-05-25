@@ -1,9 +1,9 @@
 import {Router} from 'express'
 // import {ProductManager} from '../managerProducts.js';
-import {ProductManager} from "../Dao/managerProductsMongo.js"
+import {ProductManager} from "../DAL/managerProductsMongo.js"
 import  __dirname  from "../util.js";
 import session from 'express-session';
-
+import {findAllProducts} from '../controllers/ProductsMongo.controller.js'
 
 
 
@@ -17,18 +17,7 @@ router.use(session({
 
 const productManager = new ProductManager(__dirname+'../../productos.json')
 
-router.get('/', async (req, res) => {
-    try {
-      const email = req.session.email
-      console.log(req.session.email + "session")
-      const products = await productManager.getAllProducts();
-      res.render('products', {products, email, layout: 'main'});
-      console.log(products)
-    } catch (error) {
-      console.error(error);
-      res.json(500).json({ message: 'Internal server error' });
-    }
-  });
+router.get('/', findAllProducts);
 
 
   

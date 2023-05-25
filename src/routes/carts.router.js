@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ManagerCart } from "../Dao/managerCart.js";
+import { ManagerCart } from "../DAL/managerCart.js";
 
 import  __dirname  from "../util.js";
 
@@ -31,9 +31,9 @@ router.get('/:idCart', async (req, res) => {
 
 
 //Agregar un producto a un carrito
-router.post('/:idCart/product/:idProduct', async (req, res) => {
-const {idCart, idProduct} = req.params
-const addProduct = await managerCart.addProductToCart(idCart, idProduct)
+router.post('/:idCart/product/:idProduct/:idUser', async (req, res) => {
+const {idCart, idProduct, idUser} = req.params
+const addProduct = await managerCart.addProductToCart(idCart, idProduct, idUser)
 res.json({message:addProduct})
 })
 

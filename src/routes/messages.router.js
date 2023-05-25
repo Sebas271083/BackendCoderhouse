@@ -1,6 +1,6 @@
 import {Router} from 'express'
 import  __dirname  from "../util.js";
-import { MessageManager } from '../Dao/managerMessagesMongo.js';
+import { MessageManager } from '../DAL/managerMessagesMongo.js';
 
 const messageManager = new MessageManager();
 
