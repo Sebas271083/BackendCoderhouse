@@ -11,43 +11,42 @@ const managerCart = new ManagerCart()
 
 //Crear Carrito
 router.post('/', async (req, res) => {
-    const newCart = await managerCart.createCart()
-    res.json({cart: newCart})
-})
+  try {
+    const userId = req.user.id; // Obtener el ID de usuario de req.user.id
+    const productId = req.body.productId; // Obtener el ID del producto desde el cuerpo de la solicitud
+    console.log(productId)
+    const newCart = await managerCart.createCart(userId, productId);
+    res.json({ cart: newCart });
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: 'Error al crear el carrito' });
+  }
+});
 
 //Buscar los carritos
 router.get('/', async (req, res) => {
-    const auth = req.isAuthenticated()
-    if(!auth){
-        res.json({message: "Debe iniciar sesion"})
-        return
+    const auth = req.isAuthenticated();
+    if (!auth) {
+        res.json({ message: "Debe iniciar sesión" });
+        return;
     }
-    const idUserSession = req.user.id
-    console.log(auth)
+    const idUserSession = req.user.id;
+    console.log(auth);
 
-    const cart = await managerCart.getCarts()
-    const idUserCart = cart[0].user[0]._id 
-    if(idUserSession == idUserCart ) {
-        console.log(" cart ....... " + cart[0].product  )
-        const cartViewProduct = Array.from(cart[0].product);
+    const allCarts = await managerCart.getCarts();
+    const userCarts = allCarts.filter(cart => cart.user[0]._id.toString() === idUserSession);
 
-
-        const cartViewUser = [cart[0].user[0].first_name + " " + cart[0].user[0]. last_name ]
-        
-        console.log("cartViewUser "+ cartViewUser)
-        console.log("cartViewProduct "+ cartViewProduct)
-
-        
-
-        res.render('cartsAll',{cartViewUser, cartViewProduct })
-        
-        // res.json({cart})
+    if (userCarts.length > 0) {
+        const cart = userCarts[0];
+        const cartViewProduct = Array.from(cart.product);
+        const cartViewUser = [cart.user[0].first_name + " " + cart.user[0].last_name];
+        console.log("cartViewUser " + cartViewUser);
+        console.log("cartViewProduct " + cartViewProduct);
+        res.render('cartsAll', { cartViewUser, cartViewProduct });
     } else {
-        res.json({message: "El Usuario no tiene un carrito o no esta logueado"})
+        res.json({ message: "El usuario no tiene un carrito o no está logueado" });
     }
-    
-    // res.render('cart', cart );
-})
+});
 
 
 //Buscar un carrito
