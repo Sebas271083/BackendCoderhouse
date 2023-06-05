@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+
+<h1 class="text-center">Carrito de compras</h1>
+
+<div class="cart-item">
+  <h2 class="p-5">Usuario: {{cartViewUser}}</h2>
+
+  {{#if cartViewProduct}}
+  <div class="table-responsive p-5">
+    <table class="table table-striped">
+      <thead class="table-light">
+        <tr>
+          <th scope="col">Producto</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Código</th>
+          <th scope="col">Stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each cartViewProduct}}
+        <tr>
+          <td>{{this.title}}</td>
+          <td>{{this.description}}</td>
+          <td>$ {{this.price}}</td>
+          <td>{{this.code}}</td>
+          <td>{{this.stock}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    <form action="/products">
+  <div class="text-end  ">
+    <button type="submit" class="btn btn-success">Comprar</button>
+    <button type="button" class="btn btn-danger">Eliminar Carrito</button>    
+  </div>
+</form>
+  </div>
+  {{else}}
+  <p>No hay productos en el carrito</p>
+  {{/if}}
+</div>
+

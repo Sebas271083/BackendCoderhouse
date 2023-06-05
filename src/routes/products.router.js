@@ -1,9 +1,9 @@
 import {Router} from 'express'
 // import {ProductManager} from '../managerProducts.js';
-import {ProductManager} from "../DAL/managerProductsMongo.js"
-import  __dirname  from "../util.js";
+import {ProductManager} from "../DAL/DAOs/managerProducts.js"
+import  __dirname  from "../utils/util.js";
 import session from 'express-session';
-import {findAllProducts} from '../controllers/ProductsMongo.controller.js'
+import {findAllProducts, findOneProduct,createOneProduct} from '../controllers/ProductsMongo.controller.js'
 
 
 
@@ -15,7 +15,9 @@ router.use(session({
   saveUninitialized: true,
 }));
 
-const productManager = new ProductManager(__dirname+'../../productos.json')
+// const productManager = new ProductManager(__dirname+'../../productos.json')
+const productManager = new ProductManager()
+
 
 router.get('/', findAllProducts);
 
@@ -33,29 +35,19 @@ router.get('/paginate', async (req, res) => {
 });
   
 
-  router.post('/', async(req, res) => {
-    const newproduct = await productManager.addProduct(req.body)
-    res.json({message: 'Product created', product: newproduct})
-  })
+  router.get('/crear-producto', (req, res) => {
+    res.render('productsCreate');
+  });
+
+
+  router.post('/', createOneProduct)
 
   
   // Endpoint para obtener un producto por su id
-  router.get('/:id', async (req, res) => {
-    const productId = req.params.id;
+  router.get('/:id', findOneProduct);
   
-    try {
-      const product = await productManager.getProductById(productId);
-      if (product) {
-        res.json(product);
-      } else {
-        res.send("Producto no existe");
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal server error' });
-    }
-  });
-  
+
+
 
   router.put('/:id', async(req, res) => {
     try {

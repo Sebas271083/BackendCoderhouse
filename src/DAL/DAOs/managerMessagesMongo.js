@@ -1,4 +1,4 @@
-import Message from "../DAL/db/models/messagesModel.js";
+import Message from "../db/models/messagesModel.js";
 
 
 export class MessageManager {

@@ -1,12 +1,12 @@
-import {productsModel} from '../DAL/db/models/products.mode.js'
+import {productsModel} from '../db/models/products.mode.js'
 
 export class ProductManager {
     async getAllProducts() {
         try {
             const products = await productsModel.find().lean()
-            return products;
+              return products;
           } catch (error) {
-                console.log(error)
+              console.log(error)
           }
     }
 

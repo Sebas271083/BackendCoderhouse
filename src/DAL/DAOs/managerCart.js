@@ -1,14 +1,14 @@
-import {cartsModel} from '../DAL/db/models/Carts.model.js'
+import {cartsModel} from '../db/models/Carts.model.js'
 
 
-export class ManagerCart {
+export class  ManagerCart {
     constructor(path){
         this.path = path
     }
 
     async getCarts() {
         try {
-            const carts = await cartsModel.find().populate('product').populate('user')
+            const carts = await cartsModel.find().populate('product').populate('user').lean()
             return carts
         } catch (err) {
             console.log(err)

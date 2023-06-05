@@ -4,7 +4,9 @@ export const findAllProducts = async(req, res)=>{
     try {
         const products = await getAllProducts()
         if(products.length){
-            res.status(200).json({message:"Products found"})
+            console.log(products)
+            // res.status(200).json({message:"Products found", products})
+            res.render('products', { products: products });
         } else {
             res.status(200).json({message:"No Products"})
         }
@@ -18,9 +20,10 @@ export const findOneProduct = async(req, res)=>{
     try {
         const product = await getProductById(id)
         if(product){
-            res.status(200).json({message: 'User found', product})
+            console.log(product)
+            res.render('product', product );
         }else {
-            res.status(200).json({message:'No user'})
+            res.status(200).json({message:'No product'})
         }
     } catch (error) {
         console.log(error)
@@ -36,11 +39,11 @@ export const createOneProduct = async(req, res)=>{
 
     try {
         const newProduct = await addProduct(req.body)
-        res.status(200).json({message: 'Product Created', Product: newProduct})
+        // res.status(200).json({message: 'Product Created', Product: newProduct})
+        res.render('product', newProduct );
     } catch (error) {
         console.log(error)
     }
-
 }
 
 

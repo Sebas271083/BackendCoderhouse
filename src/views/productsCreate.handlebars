@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <h1 class="text-center">Crear Producto</h1>
+
+      <form action="/products" method="POST" class="mt-4">
+        <div class="form-group">
+          <label for="title">Título del producto</label>
+          <input type="text" class="form-control" id="title" name="title" placeholder="Título del producto" required>
+        </div>
+        <div class="form-group">
+          <label for="description">Descripción del producto</label>
+          <input type="text" class="form-control" id="description" name="description" placeholder="Descripción del producto" required>
+        </div>
+        <div class="form-group">
+          <label for="price">Precio del producto</label>
+          <input type="number" class="form-control" id="price" name="price" placeholder="Precio del producto" required>
+        </div>
+        <div class="form-group">
+          <label for="code">Código del producto</label>
+          <input type="text" class="form-control" id="code" name="code" placeholder="Código del producto" required>
+        </div>
+        <div class="form-group">
+          <label for="stock">Stock del producto</label>
+          <input type="number" class="form-control" id="stock" name="stock" placeholder="Stock del producto" required>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Crear producto</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+

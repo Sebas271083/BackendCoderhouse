@@ -1,21 +1,36 @@
 <div class="container">
-  <div class="form-container">
-    <h1 class="form-heading">Iniciar sesión</h1>
-    <form action="/login" method="POST" class="form">
-      <div class="form-group">
-        <label for="email" class="form-label">Correo electrónico:</label>
-        <input type="email" name="email" id="email" class="form-input" required>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center">Iniciar sesión</h1>
+          <form action="/login" method="POST">
+            <div class="form-group">
+              <label for="email">Correo electrónico:</label>
+              <input type="email" name="email" id="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Contraseña:</label>
+              <input type="password" name="password" id="password" class="form-control" required>
+            </div>
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+            </div>
+          </form>
+          <div class="text-center">
+            <p>No tienes una cuenta? <a href="./login/signup">Créala</a></p>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="password" class="form-label">Contraseña:</label>
-        <input type="password" name="password" id="password" class="form-input" required>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="form-button">Iniciar sesión</button>
-      </div>
-      <div class="text-center">
-        <p>No tienes una cuenta? <a class="text-center" href="./login/signup">Creala</a></p>
-      </div>
-    </form>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-6 text-center">
+      <button onclick="location.href='/login/google'" class="btn btn-primary btn-google">
+        <img  style="width: 30px;" src="https://img2.freepng.es/20180416/xlq/kisspng-g-suite-pearl-river-middle-school-google-software-sign-up-button-5ad4e1a9d11d62.1599053415239008418566.jpg"
+          alt="Google Icon" class="btn-google-icon">
+        Iniciar sesión con Google
+      </button>
+    </div>
   </div>
 </div>

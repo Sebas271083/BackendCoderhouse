@@ -3,7 +3,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GithubStrategy} from "passport-github2";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import usersModel from '../DAL/db/models/Users.model.js'
-import { compareData, hasData } from "../util.js";
+import { compareData, hasData } from "../utils/util.js";
 
 
 //LOCALES

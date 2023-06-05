@@ -1,4 +1,4 @@
-import {ProductManager} from '../DAL/managerProductsMongo.js'
+import {ProductManager} from '../DAL/DAOs/managerProductsMongo.js'
 
 const managerProductsMongo = new ProductManager()
 
@@ -13,7 +13,7 @@ const managerProductsMongo = new ProductManager()
 
     export const getProductById = async(id)=>{
         try {
-            const product = await managerProductsMongo.getProductById()
+            const product = await managerProductsMongo.getProductById(id)
             return product
         } catch (error) {
             console.log(error)
