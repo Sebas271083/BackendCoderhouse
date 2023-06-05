@@ -1,11 +1,13 @@
 import express from 'express';
 import __dirname from './utils/util.js'
+import inicioRouter from './routes/inicio.router.js'
 import cartsRouter from './routes/carts.router.js'
 import productRouter from './routes/products.router.js'
 import messagesRouter from './routes/messages.router.js'
 import loginRouter from './routes/login.router.js'
 import usersRouter from './routes/users.routes.js'
 import ticketsRouter from './routes/tickets.routes.js'
+import contactRouter from './routes/contacts.router.js'
 import session from 'express-session'
 import MongoStore from 'connect-mongo';
 import handlebars from 'express-handlebars'
@@ -48,13 +50,14 @@ app.use((req, res, next) => {
     next();
   });
 
+app.use('/', inicioRouter)
 app.use('/products', productRouter)
 app.use('/carts', cartsRouter)
 app.use('/chat', messagesRouter)
 app.use('/login', loginRouter)
 app.use('/users', usersRouter)
 app.use('/tickets', ticketsRouter)
-
+app.use('/contacts', contactRouter)
 
 
 
