@@ -8,7 +8,12 @@ export class ManagerCart {
 
   async getCarts() {
     try {
-      const carts = await cartsModel.find().populate('product').populate('user').lean()
+      const carts = await cartsModel.find()     
+      .populate({ path: 'product._id', model: 'products' })
+      .populate({ path: 'user', model: 'Users' })
+      .lean();
+
+      console.log("carts::::::::" + carts)
       return carts
     } catch (err) {
       console.log(err)
@@ -28,24 +33,35 @@ export class ManagerCart {
 
 
   async createCart(userId, productId) {
-        
-
-        const allCarts = await cartsModel.find();
-        const userCarts = allCarts.filter(cart => cart.user[0]._id.toString() === userId);
-        if (userCarts.length > 0) {
-          // Si se encontró un carrito para el usuario, agregar el producto al carrito existente
-          const cart = userCarts[0];
-          cart.product.push(productId);
-          const updatedCart = await cart.save();
-          return updatedCart
-        }
-
+    const allCarts = await cartsModel.find();
+    const userCarts = allCarts.filter(cart => cart.user[0]._id.toString() === userId);
+  
+    if (userCarts.length > 0) {
+      // Si se encontró un carrito para el usuario, agregar el producto al carrito existente
+      const cart = userCarts[0];
+      console.log(cart);
+      const existingProduct = cart.product.find(p => p._id.toString() === productId);
+      console.log("existingProduct::::::" + existingProduct);
+  
+      if (existingProduct) {
+        existingProduct.quantity += 1; // Aumentar la cantidad del producto existente
+        const updatedCart = await cart.save();
+        return updatedCart;
+      } else {
+        cart.product.push({ _id: productId, quantity: 1 });
+      }
+  
+      const updatedCart = await cart.save();
+      return updatedCart;
+    }
+  
     const newCart = await cartsModel.create({
       user: userId,
-      product: [productId]
+      product: [{ _id: productId, quantity: 1 }]
     });
     return newCart;
   }
+  
 
   async addProductToCart(idCart, idProduct, idUser) {
     const cart = await cartsModel.findOne({ _id: idCart });
@@ -77,4 +93,3 @@ export class ManagerCart {
 
 //HAcer update para poder pasarlo al router de post
 
-  

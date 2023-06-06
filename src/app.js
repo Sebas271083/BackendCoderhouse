@@ -11,6 +11,7 @@ import contactRouter from './routes/contacts.router.js'
 import session from 'express-session'
 import MongoStore from 'connect-mongo';
 import handlebars from 'express-handlebars'
+import Handlebars from 'handlebars';
 import { Server } from 'socket.io'
 import passport from 'passport';
 import './passport/pasportStrategies.js'
@@ -63,6 +64,10 @@ app.use('/contacts', contactRouter)
 
 
 //Configuracion motor de plantillas
+
+Handlebars.registerHelper('multiply', function(a, b) {
+    return a * b;
+  });
 app.engine('handlebars', handlebars.engine())
 app.set('views', __dirname+'/../views')
 app.set('view engine', 'handlebars')

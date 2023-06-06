@@ -34,6 +34,7 @@ router.get('/', async (req, res) => {
     console.log(auth);
 
     const allCarts = await managerCart.getCarts();
+    console.log("allCarts::::::::" + allCarts)
     const userCarts = allCarts.filter(cart => cart.user[0]._id.toString() === idUserSession);
 
     if (userCarts.length > 0) {
@@ -43,6 +44,7 @@ router.get('/', async (req, res) => {
         console.log("cartViewUser " + cartViewUser);
         console.log("cartViewProduct " + cartViewProduct);
         res.render('cartsAll', { cartViewUser, cartViewProduct });
+        // res.json({message:"cart", cartViewProduct})
     } else {
         res.json({ message: "El usuario no tiene un carrito o no está logueado" });
     }

@@ -1,22 +1,20 @@
-// import mongoose, { Schema } from "mongoose";
 
-// const cartsSchema = new Schema({
-//     products:{
-//         type: mongoose.Schema.Types.ObjectId,
-//         ref: 'products'
-//     }
-// })
-
-// export const cartsModel = mongoose.model('carts', cartsSchema)
 
 
 import mongoose, { Schema } from "mongoose";
 
 const cartsSchema = new Schema({
+
     product: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'products'
-    }],
+        _id: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'products'
+        },
+        quantity: {
+          type: Number,
+          default: 1
+        }
+      }],
     user: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Users'
