@@ -35,7 +35,7 @@ export class ManagerCart {
   async createCart(userId, productId) {
     const allCarts = await cartsModel.find();
     const userCarts = allCarts.filter(cart => cart.user[0]._id.toString() === userId);
-  
+
     if (userCarts.length > 0) {
       // Si se encontró un carrito para el usuario, agregar el producto al carrito existente
       const cart = userCarts[0];
@@ -78,15 +78,30 @@ export class ManagerCart {
   }
 
 
-  async deleteProduct(pid) {
-    try {
-      const productDelete = await Product.findByIdAndDelete(pid)
-      return 'product delete, ' + productDelete
-    } catch (error) {
-      console.error(error)
-      return 'error deleting product'
+  async deleteProduct(userId, productId) {
+    const allCarts = await cartsModel.find();
+    const userCarts = allCarts.filter(cart => cart.user.length > 0 && cart.user[0]._id.toString() === userId);
+  
+    if (userCarts.length > 0) {
+      const cart = userCarts[0];
+      const existingProductIndex = cart.product.findIndex(p => p && p._id && p._id.toString() === productId);
+  
+      if (existingProductIndex !== -1) {
+        if (cart.product[existingProductIndex].quantity >= 2) {
+          cart.product[existingProductIndex].quantity -= 1;
+        } else {
+          cart.product = cart.product.filter(p => p._id.toString() !== productId);
+        }
+        const updatedCart = await cart.save();
+        return updatedCart;
+      }
     }
+
   }
+  
+  
+  
+  
 
 }
 

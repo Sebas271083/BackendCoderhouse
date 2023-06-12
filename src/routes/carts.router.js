@@ -16,7 +16,8 @@ router.post('/', async (req, res) => {
     const productId = req.body.productId; // Obtener el ID del producto desde el cuerpo de la solicitud
     console.log(productId)
     const newCart = await managerCart.createCart(userId, productId);
-    res.json({ cart: newCart });
+    // res.json({ cart: newCart });
+    res.redirect('/carts')
   } catch (error) {
     console.log(error)
     res.status(500).json({ error: 'Error al crear el carrito' });
@@ -35,15 +36,19 @@ router.get('/', async (req, res) => {
 
     const allCarts = await managerCart.getCarts();
     console.log("allCarts::::::::" + allCarts)
-    const userCarts = allCarts.filter(cart => cart.user[0]._id.toString() === idUserSession);
+    // const userCarts = allCarts.filter(cart => cart.user[0]._id.toString() === idUserSession);
+    const userCarts = allCarts.filter(cart => Array.isArray(cart.user) && cart.user.length > 0 && cart.user[0]._id.toString() === idUserSession);
+
+    console.log(userCarts)
 
     if (userCarts.length > 0) {
+        let showSpinner = false;
         const cart = userCarts[0];
         const cartViewProduct = Array.from(cart.product);
         const cartViewUser = [cart.user[0].first_name + " " + cart.user[0].last_name];
         console.log("cartViewUser " + cartViewUser);
         console.log("cartViewProduct " + cartViewProduct);
-        res.render('cartsAll', { cartViewUser, cartViewProduct });
+        res.render('cartsAll', { cartViewUser, cartViewProduct, showSpinner });
         // res.json({message:"cart", cartViewProduct})
     } else {
         res.json({ message: "El usuario no tiene un carrito o no está logueado" });
@@ -70,10 +75,20 @@ res.json({ addProduct });
 
 //Eliminar del carrito el producto seleccionado
 
-router.delete('/:cid/products/:pid', async(req, res) => {
+router.delete('/delete/:pid', async(req, res) => {
+    const userId = req.user.id;
     const {pid} = req.params
-    const productDelete = await managerCart.deleteProduct(pid)
-    res.json({message:productDelete})
+    console.log("pid" + pid)
+    const productDelete = await managerCart.deleteProduct(userId, pid)
+    console.log("productDelete:::: " + productDelete)
+
+    if (productDelete) {
+      res.json({ message: "Product deleted successfully." });
+
+      // res.redirect('/carts')
+    } else {
+      res.json({ message: "Product not found or could not be deleted." });
+    }
 })
 
 
