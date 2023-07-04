@@ -5,6 +5,7 @@ import cartsRouter from './routes/carts.router.js'
 import productRouter from './routes/products.router.js'
 import messagesRouter from './routes/messages.router.js'
 import loginRouter from './routes/login.router.js'
+import usuariosRouter from './routes/usuarios.router.js'
 import usersRouter from './routes/users.router.js'
 import ticketsRouter from './routes/tickets.routes.js'
 import contactRouter from './routes/contacts.router.js'
@@ -67,6 +68,7 @@ app.use('/products', productRouter)
 app.use('/carts', cartsRouter)
 app.use('/chat', messagesRouter)
 app.use('/login', loginRouter)
+app.use('/usuarios', usuariosRouter)
 app.use('/users', usersRouter)
 app.use('/tickets', ticketsRouter)
 app.use('/contacts', contactRouter)
