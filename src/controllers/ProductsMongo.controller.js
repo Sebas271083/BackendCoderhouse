@@ -5,8 +5,10 @@ export const findAllProducts = async(req, res)=>{
         const products = await getAllProducts()
         if(products.length){
             console.log(products)
+
             // res.status(200).json({message:"Products found", products})
             res.render('products', { products: products });
+
         } else {
             res.status(200).json({message:"No Products"})
         }

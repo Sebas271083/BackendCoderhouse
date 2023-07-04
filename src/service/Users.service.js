@@ -11,3 +11,13 @@ export const getAllProducts = async()=>{
         console.log(error)
     }
 }
+
+
+export const getUser = async(id)=>{
+    try {
+        const user = await usersManager.getUserById(id)
+        return user
+    } catch (error) {
+        console.log(error)
+    }
+}

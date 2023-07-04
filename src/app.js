@@ -5,7 +5,7 @@ import cartsRouter from './routes/carts.router.js'
 import productRouter from './routes/products.router.js'
 import messagesRouter from './routes/messages.router.js'
 import loginRouter from './routes/login.router.js'
-import usersRouter from './routes/users.routes.js'
+import usersRouter from './routes/users.router.js'
 import ticketsRouter from './routes/tickets.routes.js'
 import contactRouter from './routes/contacts.router.js'
 import session from 'express-session'
@@ -21,6 +21,7 @@ const app = express();
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+console.log("dir" + __dirname)
 
 //Archivos estaticos
 app.use(express.static(__dirname+'/public'))
@@ -51,6 +52,16 @@ app.use((req, res, next) => {
     next();
   });
 
+//Configuracion motor de plantillas
+
+Handlebars.registerHelper('multiply', function(a, b) {
+    return a * b;
+  });
+app.engine('handlebars', handlebars.engine())
+app.set('views', __dirname + '/../views')
+
+app.set('view engine', 'handlebars')
+
 app.use('/', inicioRouter)
 app.use('/products', productRouter)
 app.use('/carts', cartsRouter)
@@ -60,17 +71,6 @@ app.use('/users', usersRouter)
 app.use('/tickets', ticketsRouter)
 app.use('/contacts', contactRouter)
 
-
-
-
-//Configuracion motor de plantillas
-
-Handlebars.registerHelper('multiply', function(a, b) {
-    return a * b;
-  });
-app.engine('handlebars', handlebars.engine())
-app.set('views', __dirname+'/../views')
-app.set('view engine', 'handlebars')
 
 //const productManager = new ProductManager('./productos.json');
 

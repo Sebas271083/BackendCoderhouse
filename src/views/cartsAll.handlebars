@@ -47,7 +47,8 @@
       <div class="text-end  ">
         <button type="button" class="btn btn-success" data-bs-toggle="modal"
           data-bs-target="#checkoutModal">Comprar</button>
-        <button type="button" class="btn btn-danger">Eliminar Carrito</button>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+          data-bs-target="#checkoutModalEliminar">Eliminar Carrito</button>
       </div>
     </form>
   </div>
@@ -75,6 +76,25 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-primary">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal eliminar Carrito -->
+<div class="modal fade" id="checkoutModalEliminar" tabindex="-1" aria-labelledby="checkoutModalEliminarLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="checkoutModalEliminarLabel">Eliminar Carrito</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Desea eliminar el carrito?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger">Confirmar</button>
       </div>
     </div>
   </div>

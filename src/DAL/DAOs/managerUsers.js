@@ -1,5 +1,6 @@
 import Users from "../db/models/Users.model.js";
 
+
 export class UsersManager {
     async getAll(){
         try {
@@ -9,4 +10,14 @@ export class UsersManager {
             return error
         }
     }
+    async getUserById(id) {
+        const user = await Users.findById(id);
+        if (user) {
+          return user;
+        } else {
+          throw new Error('User not found');
+        }
+      }
 }
+
+
