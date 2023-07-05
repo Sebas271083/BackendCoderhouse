@@ -1,21 +1,20 @@
 import { Router } from "express";
-import UsersModel from "../DAL/db/models/Users.model.js"
 import passport from "passport";
 
 
 const router = Router()
 
 
-
-
-
-router.get('/', (req, res) => {
-    if (req.session.email) {
-        res.redirect('login/bienvenida')
-        return
+router.get('/', async (req, res) => {
+    try {
+        // if (req.session.id) {
+        //     res.redirect('/login/bienvenida')
+        //     return
+        // }
+        res.render('login')
+    } catch (error) {
+        console.log(error)
     }
-    console.log(req.session.email)
-    res.render('login')
 })
 
 router.post('/', passport.authenticate('local'), (req, res) => {
@@ -75,6 +74,7 @@ router.get('/googleCallback', passport.authenticate('googleSignUp'), (req, res) 
 
 router.get('/bienvenida', (req, res) => {
     if (req.session?.email) {
+        console.log("mail:::::" + req.session.email)
         res.send(`Bienvenido ${req.session.email}`)
         return
     }
@@ -95,8 +95,6 @@ router.get('/logout', (req, res) => {
         res.redirect('/login');
     }
 });
-
-
 
 
 export default router

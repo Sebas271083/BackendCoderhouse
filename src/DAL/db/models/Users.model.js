@@ -16,7 +16,8 @@ const usersSchema = new mongoose.Schema({
     password: { 
       type: String,
       require: true
-    }
+    },
+    token: {type: String}
   });
   
   const Users = mongoose.model('Users', usersSchema);
