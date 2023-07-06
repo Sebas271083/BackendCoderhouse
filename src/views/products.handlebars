@@ -9,7 +9,7 @@
           <p class="card-text" style="color: #555;">{{description}}</p>
           <p class="card-text" style="color: #555;">Precio: ${{price}}</p>
           <p class="card-text" style="color: #555;">Stock: {{stock}}</p>
-          <p class="card-text" style="color: #555;">id: {{_id}}</p>
+          {{!-- <p class="card-text" style="color: #555;">id: {{_id}}</p> --}}
 
           <form id="addToCartForm-{{_id}}" action="/carts" method="POST">
             <input type="hidden" name="productId" value={{_id}}>

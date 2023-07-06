@@ -17,6 +17,24 @@ export const findAllProducts = async(req, res)=>{
     }
 }
 
+
+export const findAllProductsAdmin = async (req, res)=>{
+    try {
+        const products = await getAllProducts()
+        if(products.length){
+            console.log(products)
+
+            // res.status(200).json({message:"Products found", products})
+            res.render('productsAdmin', { layout: 'administracion', products });
+
+        } else {
+            res.status(200).json({message:"No Products"})
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export const findOneProduct = async(req, res)=>{
     const {id} = req.params
     try {
@@ -42,7 +60,7 @@ export const createOneProduct = async(req, res)=>{
     try {
         const newProduct = await addProduct(req.body)
         // res.status(200).json({message: 'Product Created', Product: newProduct})
-        res.render('product', newProduct );
+        res.render('product', newProduct);
     } catch (error) {
         console.log(error)
     }

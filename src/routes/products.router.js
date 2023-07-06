@@ -3,7 +3,7 @@ import {Router} from 'express'
 import {ProductManager} from "../DAL/DAOs/managerProducts.js"
 import  __dirname  from "../utils/util.js";
 import session from 'express-session';
-import {findAllProducts, findOneProduct,createOneProduct} from '../controllers/ProductsMongo.controller.js'
+import {findAllProducts, findOneProduct,createOneProduct, findAllProductsAdmin} from '../controllers/ProductsMongo.controller.js'
 
 
 
@@ -22,6 +22,9 @@ const productManager = new ProductManager()
 router.get('/', findAllProducts);
 
 
+router.get('/actualizar-producto', findAllProductsAdmin)
+
+
   
 router.get('/paginate', async (req, res) => {
   try {
@@ -36,8 +39,10 @@ router.get('/paginate', async (req, res) => {
   
 
   router.get('/crear-producto', (req, res) => {
-    res.render('productsCreate');
+    res.render('productsCreate', { layout: 'administracion' });
   });
+
+
 
 
   router.post('/', createOneProduct)
@@ -46,8 +51,6 @@ router.get('/paginate', async (req, res) => {
   // Endpoint para obtener un producto por su id
   router.get('/:id', findOneProduct);
   
-
-
 
   router.put('/:id', async(req, res) => {
     try {

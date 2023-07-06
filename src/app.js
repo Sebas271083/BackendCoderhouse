@@ -1,6 +1,7 @@
 import express from 'express';
 import __dirname from './utils/util.js'
 import inicioRouter from './routes/inicio.router.js'
+import admin from './routes/admin.js'
 import cartsRouter from './routes/carts.router.js'
 import productRouter from './routes/products.router.js'
 import messagesRouter from './routes/messages.router.js'
@@ -55,6 +56,7 @@ app.use((req, res, next) => {
 
 
 app.use('/', inicioRouter)
+app.use('/admin', admin)
 app.use('/products', productRouter)
 app.use('/carts', cartsRouter)
 app.use('/chat', messagesRouter)
