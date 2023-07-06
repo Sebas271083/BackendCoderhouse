@@ -39,3 +39,12 @@ const managerProductsMongo = new ProductManager()
             console.log(error)
         }
     }
+
+    export const deleteProductId = async (id) => {
+        try {
+            const productDelete = await managerProductsMongo.deleteProduct(id)
+            return productDelete
+        } catch (error) {
+            console.log(error)
+        }
+    }

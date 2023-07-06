@@ -1,4 +1,4 @@
-import {getAllProducts, getProductById, addProduct, updateProductOne} from '../service/ProductsMongo.service.js'
+import {getAllProducts, getProductById, addProduct, updateProductOne, deleteProductId} from '../service/ProductsMongo.service.js'
 
 export const findAllProducts = async(req, res)=>{
     try {
@@ -69,9 +69,9 @@ export const createOneProduct = async(req, res)=>{
 export const updateOneProduct = async(req, res)=>{
     try {
         console.log(req.params)
-        const {userId} = req.params;
-        console.log(userId)
-        const updatedProduct = await updateProductOne(userId, req.body);
+        const {productId} = req.params;
+        console.log(productId)
+        const updatedProduct = await updateProductOne(productId, req.body);
         console.log(updateProduct)
         res.redirect('/admin');
       } catch (error) {
@@ -95,10 +95,11 @@ export const updateProduct = async(req, res)=> {
 }
 
 
-export const deleteOneProduct = async(req, res)=>{
+export const deleteProduct = async(req, res)=>{
     try {
-        const productId = req.params.id;
-        const deleteOneProduct = await deleteProduct(productId);
+        const id = req.params.id;
+        console.log(id)
+        const deleteOneProduct = await deleteProductId(id);
         res.json(deleteOneProduct);
       } catch (error) {
         console.log(error)

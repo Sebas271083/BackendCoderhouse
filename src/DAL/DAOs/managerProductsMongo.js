@@ -85,11 +85,12 @@ export class ProductManager {
 
       async deleteProduct(id) {
         try {
-          const product = await productsModel.findByIdAndDelete(id);
+          const product = await productsModel.deleteOne({_id: id});
           if (!product) {
             console.error('Product not found');
             return;
           }
+          return product
           // El documento eliminado está en la variable `product`
         } catch (error) {
           console.error(error);

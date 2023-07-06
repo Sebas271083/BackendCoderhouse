@@ -6,7 +6,9 @@
       <th>Nombre</th>
       <th>Descripción</th>
       <th>Precio</th>
-      <th>Acciones</th>
+      <th>Editar</th>
+      <th>Eliminar</th>
+
     </tr>
   </thead>
   <tbody>
@@ -17,7 +19,11 @@
       <td>${{price}}</td>
       <td>
         <a href="/products/actualizar-producto/{{_id}}" class="btn btn-primary">Editar</a>
-        <a href="/eliminar/{{_id}}" class="btn btn-danger">Eliminar</a>
+      </td>
+      <td>
+      <form action="/products/delete/{{_id}}?_method=DELETE" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este producto?')">
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+      </form>
       </td>
     </tr>
     {{/each}}
