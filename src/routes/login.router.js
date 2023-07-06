@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
         //     res.redirect('/login/bienvenida')
         //     return
         // }
+
         res.render('login')
     } catch (error) {
         console.log(error)

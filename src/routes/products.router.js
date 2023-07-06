@@ -3,7 +3,7 @@ import {Router} from 'express'
 import {ProductManager} from "../DAL/DAOs/managerProducts.js"
 import  __dirname  from "../utils/util.js";
 import session from 'express-session';
-import {findAllProducts, findOneProduct,createOneProduct, findAllProductsAdmin} from '../controllers/ProductsMongo.controller.js'
+import {findAllProducts, findOneProduct,createOneProduct, findAllProductsAdmin, updateOneProduct, updateProduct} from '../controllers/ProductsMongo.controller.js'
 
 
 
@@ -22,7 +22,10 @@ const productManager = new ProductManager()
 router.get('/', findAllProducts);
 
 
-router.get('/actualizar-producto', findAllProductsAdmin)
+router.get('/listar-productos', findAllProductsAdmin)
+router.get('/actualizar-producto/:id', updateProduct)
+router.put('/actualizar/:userId', updateOneProduct)
+
 
 
   

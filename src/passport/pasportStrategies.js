@@ -19,6 +19,14 @@ passport.use('local', new LocalStrategy(
         if (!isPassword) {
             return done(null, false)
         }
+        console.log(user.email)
+        // Verificar el perfil del usuario
+        if (user.isAdmin) {
+            user.profile = 'admin';
+        } else {
+            user.profile = 'user';
+        }
+
         done(null, user)
     }
 ))
@@ -32,14 +40,17 @@ passport.use(
         passReqToCallback: true
     },
         async (req, email, password, done) => {
-            console.log(req)
             const userDB = await usersModel.findOne({ email })
             if (userDB) { 
                 return done(null, false)
             }
+            let isAdmin = false
+            if(email == "sebdelgado83@gmail.com"){
+                isAdmin = true
+            }
             console.log("req.body....  " + req.body.first_name)
             const hashPassword = await hasData(password)
-            const newUser = { ...req.body, password: hashPassword }
+            const newUser = { ...req.body, password: hashPassword, isAdmin }
             const newUserDB = await usersModel.create(newUser)
             done(null, newUserDB)
         }

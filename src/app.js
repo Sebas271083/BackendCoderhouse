@@ -17,6 +17,7 @@ import { Server } from 'socket.io'
 import passport from 'passport';
 import './passport/pasportStrategies.js'
 import './DAL/db/dbConfig.js'
+import methodOverride from 'method-override'
 
 const app = express();
 
@@ -26,6 +27,8 @@ console.log("dir" + __dirname)
 
 //Archivos estaticos
 app.use(express.static(__dirname+'/public'))
+
+app.use(methodOverride('_method'));
 
 
 //Configurar Passport

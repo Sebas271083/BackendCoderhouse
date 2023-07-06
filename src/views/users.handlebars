@@ -1,0 +1,27 @@
+<h1>Lista de Usuarios</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Email</th>
+      <th>isAdmin</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each users}}
+    <tr>
+      <td>{{first_name}}</td>
+      <td>{{last_name}}</td>
+      <td>{{email}}</td>
+      <td>{{isAdmin}}</td>
+      <td>
+        <a href="/editar/{{_id}}" class="btn btn-primary">Editar</a>
+        <a href="/eliminar/{{_id}}" class="btn btn-danger">Eliminar</a>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 export class UsersManager {
     async getAll(){
         try {
-            const users = await Users.find()
+            const users = await Users.find().lean()
             return users
         } catch (error) {
             return error

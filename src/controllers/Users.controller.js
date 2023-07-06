@@ -7,7 +7,7 @@ export const findAllUsers = async(req, res)=>{
         const users = await getAllUsers()
         if(users.length){
             console.log(users)
-            res.status(200).json({message:"Users found", users})
+            res.render('users', {layout: 'administracion',users})
         } else {
             res.status(200).json({message:"No Users"})
         }

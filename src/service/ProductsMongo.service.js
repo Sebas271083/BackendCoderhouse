@@ -28,3 +28,14 @@ const managerProductsMongo = new ProductManager()
             console.log(error)
         }    
     }
+
+    
+
+    export const updateProductOne = async(id, obj)=> {
+        try {
+            const productUpdate = await managerProductsMongo.updateProductAdmin(id, obj)
+            return productUpdate
+        } catch (error) {
+            console.log(error)
+        }
+    }

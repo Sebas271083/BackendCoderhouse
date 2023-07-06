@@ -38,13 +38,18 @@ export class ProductManager {
 
 
 
-    async getProductById(id) {
-        const product = await productsModel.findById(id);
-        if (product) {
-          return product;
-        } else {
-          throw new Error('Product not found');
+      async getProductById(id) {
+        try {
+          const product = await productsModel.findById(id);
+          if (product) {
+            return product;
+          } else {
+            throw new Error('Product not found');
+          }
+        } catch (error) {
+         console.log(error) 
         }
+
       }
 
       async addProduct(product) {
@@ -63,13 +68,15 @@ export class ProductManager {
         }
       }
 
-      async updateProduct(id, updatedFields) {
+      async updateProductAdmin(id, obj) {
         try {
-          const product = await productsModel.findByIdAndUpdate(id, updatedFields, { new: true });
+          const product = await productsModel.findByIdAndUpdate(id, obj, { new: true });
+          console.log(product)
           if (!product) {
             console.error('Product not found');
             return;
           }
+          return product  
           // El documento actualizado está en la variable `product`
         } catch (error) {
           console.error(error);

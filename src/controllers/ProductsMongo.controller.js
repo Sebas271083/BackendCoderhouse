@@ -1,4 +1,4 @@
-import {getAllProducts, getProductById, addProduct} from '../service/ProductsMongo.service.js'
+import {getAllProducts, getProductById, addProduct, updateProductOne} from '../service/ProductsMongo.service.js'
 
 export const findAllProducts = async(req, res)=>{
     try {
@@ -66,16 +66,34 @@ export const createOneProduct = async(req, res)=>{
     }
 }
 
-
 export const updateOneProduct = async(req, res)=>{
     try {
-        const productId = req.params.id;
-        const updatedProduct = await updateProduct(productId, req.body);
-        res.json(updatedProduct);
+        console.log(req.params)
+        const {userId} = req.params;
+        console.log(userId)
+        const updatedProduct = await updateProductOne(userId, req.body);
+        console.log(updateProduct)
+        res.redirect('/admin');
       } catch (error) {
         console.log(error)
       }
 }
+
+export const updateProduct = async(req, res)=> {
+    const {id} = req.params
+    try {
+        const product = await getProductById(id)
+        if(product){
+            console.log(product)
+            res.render('productsEditAdmin', product );
+        }else {
+            res.status(200).json({message:'No product'})
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 export const deleteOneProduct = async(req, res)=>{
     try {
