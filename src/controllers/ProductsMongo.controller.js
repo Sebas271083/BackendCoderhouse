@@ -100,7 +100,7 @@ export const deleteProduct = async(req, res)=>{
         const id = req.params.id;
         console.log(id)
         const deleteOneProduct = await deleteProductId(id);
-        res.json(deleteOneProduct);
+        res.redirect('/admin')
       } catch (error) {
         console.log(error)
       }

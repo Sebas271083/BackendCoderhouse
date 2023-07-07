@@ -85,7 +85,38 @@ export class UsersManager {
           console.log(error);
         }
       };
+
+    async updateUserAdmin(id, obj) {
+      try {
+        const user = await Users.findByIdAndUpdate(id, obj, { new: true });
+        console.log("user" + user)
+        if (!user) {
+          console.error('User not found');
+          return;
+        }
+        return user  
+        // El documento actualizado está en la variable `product`
+      } catch (error) {
+        console.error(error);
+      }
     }
+
+
+    async deleteUser(id) {
+      try {
+        const user = await Users.deleteOne({_id: id});
+        if (!user) {
+          console.error('Product not found');
+          return;
+        }
+        return 
+        // El documento eliminado está en la variable `product`
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+  }
       
   
   

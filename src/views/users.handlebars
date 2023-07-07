@@ -7,7 +7,9 @@
       <th>Apellido</th>
       <th>Email</th>
       <th>isAdmin</th>
-      <th>Acciones</th>
+      <th>Editar</th>
+      <th>Eliminar</th>
+
     </tr>
   </thead>
   <tbody>
@@ -18,8 +20,13 @@
       <td>{{email}}</td>
       <td>{{isAdmin}}</td>
       <td>
-        <a href="/editar/{{_id}}" class="btn btn-primary">Editar</a>
-        <a href="/eliminar/{{_id}}" class="btn btn-danger">Eliminar</a>
+        <a href="usuarios/actualizar-usuario/{{_id}}" class="btn btn-primary">Editar</a>
+      </td>
+      <td>
+        <form action="/usuarios/delete/{{_id}}?_method=DELETE" method="POST"
+          onsubmit="return confirm('¿Estás seguro de eliminar este producto?')">
+          <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
       </td>
     </tr>
     {{/each}}

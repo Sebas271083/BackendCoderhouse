@@ -1,4 +1,4 @@
-import {getAllUsers, getUser, getUserByEmail, olvidePassword, modificarPasswordUser} from '../service/Users.service.js'
+import {getAllUsers, getUser, getUserByEmail, olvidePassword, modificarPasswordUser, updateUserOne, deleteUserId} from '../service/Users.service.js'
 import emailOlvidePassword from '../helpers/emails.js'
 import { hasData } from '../utils/util.js'
 
@@ -80,3 +80,50 @@ export const modificarPassword = async(req, res)=>{
     }
 
 }
+
+
+
+export const updateUser = async(req, res)=>{
+    const {id} = req.params
+    try {
+        const user = await getUser(id)
+        if(user){
+            console.log(user)
+            res.render('usersEditAdmin', user );
+        }else {
+            res.status(200).json({message:'No user'})
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const updateOneUser = async(req, res)=>{
+    try {
+        console.log(req.params)
+        const {usuarioId} = req.params;
+        console.log(usuarioId)
+        const updatedUser = await updateUserOne(usuarioId, req.body);
+        console.log(updateUser)
+        res.redirect('/admin');
+      } catch (error) {
+        console.log(error)
+      }
+}
+
+export const deleteUser = async(req, res)=>{
+    try {
+        const id = req.params.id;
+        if (req.user.id !== id) {
+            console.log(req.user.id)
+            console.log(id)
+            const deleteOneUser = await deleteUserId(id);
+            res.redirect('/admin')    
+        } else {
+            res.send("No se puede eliminar a si mismo")
+        }
+      } catch (error) {
+        console.log(error)
+      }
+}
+

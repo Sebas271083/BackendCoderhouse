@@ -2,4 +2,7 @@ import jwt from 'jsonwebtoken'
 
 const generarJWT = datos => jwt.sign({ email: datos.email }, process.env.JWT_SECRET, { expiresIn: "1d" })
 
-export default generarJWT
+const generarId = () => Math.random().toString(32).substring(2) + Date.now().toString(32) 
+
+
+export {generarJWT, generarId}

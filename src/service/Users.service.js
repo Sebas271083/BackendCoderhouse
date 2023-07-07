@@ -1,5 +1,5 @@
 import { UsersManager } from "../DAL/DAOs/managerUsers.js";
-import generarJWT from '../helpers/token.js'
+import {generarJWT} from '../helpers/token.js'
 
 
 const usersManager = new UsersManager()
@@ -52,4 +52,22 @@ export const olvidePassword = async(token) =>{
 
 export const modificarPasswordUser = async(idUser, password) => {
     usersManager.actualizarPassword(idUser, password)
+}
+
+export const updateUserOne = async(usuarioID, obj)=>{
+    try {
+        const userUpdate = await usersManager.updateUserAdmin(usuarioID, obj)
+        return userUpdate
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const deleteUserId = async (id) => {
+    try {
+        const UserDelete = await usersManager.deleteUser(id)
+        return UserDelete
+    } catch (error) {
+        console.log(error)
+    }
 }
