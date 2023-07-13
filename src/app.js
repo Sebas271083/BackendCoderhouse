@@ -19,6 +19,7 @@ import './passport/pasportStrategies.js'
 import './DAL/db/dbConfig.js'
 import methodOverride from 'method-override'
 
+
 const app = express();
 
 app.use(express.json())
@@ -48,6 +49,7 @@ app.use(session({
 
 app.use(passport.initialize())
 app.use(passport.session())
+
 
 // Se instancia la clase ProductManager con la ruta del archivo de productos
 

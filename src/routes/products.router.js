@@ -3,8 +3,7 @@ import {Router} from 'express'
 import {ProductManager} from "../DAL/DAOs/managerProducts.js"
 import  __dirname  from "../utils/util.js";
 import session from 'express-session';
-import {findAllProducts, findOneProduct,createOneProduct, findAllProductsAdmin, updateOneProduct, updateProduct, deleteProduct} from '../controllers/ProductsMongo.controller.js'
-
+import {findAllProducts, findOneProduct,createOneProduct, findAllProductsAdmin, updateOneProduct, updateProduct, deleteProduct, upload} from '../controllers/ProductsMongo.controller.js'
 
 
 const router = Router()
@@ -48,7 +47,7 @@ router.get('/paginate', async (req, res) => {
 
 
 
-  router.post('/', createOneProduct)
+  router.post('/', upload, createOneProduct)
 
   
   // Endpoint para obtener un producto por su id

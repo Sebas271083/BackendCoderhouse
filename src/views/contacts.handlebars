@@ -4,6 +4,9 @@
       <div class="card shadow">
         <div class="card-body">
           <h2 class="card-title text-center">Contacto</h2>
+          {{#if success}}
+            <div class="alert success-message alert-success">Tu consulta ha sido enviada con éxito.</div>
+          {{/if}}
           <form action="/contacts" method="POST">
             <div class="form-group">
               <label for="name">Nombre:</label>
@@ -26,3 +29,15 @@
     </div>
   </div>
 </div>
+
+
+<script>
+  // Agregar setTimeout para ocultar el mensaje de éxito después de 3 segundos
+  setTimeout(function() {
+    
+    var successMessage = document.getElementById('success-message');
+    if (successMessage) {
+      successMessage.style.display = 'none';
+    }
+  }, 3000);
+</script>

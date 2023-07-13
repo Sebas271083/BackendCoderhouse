@@ -1,4 +1,25 @@
 import {getAllProducts, getProductById, addProduct, updateProductOne, deleteProductId} from '../service/ProductsMongo.service.js'
+import multer from 'multer'
+import { generarId } from '../helpers/token.js';
+import __dirname from '../utils/util.js';
+// Configurar el almacenamiento del archivo
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        console.log(file)
+      cb(null, __dirname + '/../public/uploads');
+    },
+    filename: function (req, file, cb) {
+        const uniqueId = generarId();
+        cb(null, `${uniqueId} - ${file.originalname}`);
+    }
+  });
+
+  // Configurar el middleware de Multer
+const uploads = multer({ storage: storage });
+export const upload = uploads.single('img')
+
+
+
 
 export const findAllProducts = async(req, res)=>{
     try {
@@ -58,7 +79,10 @@ export const createOneProduct = async(req, res)=>{
     }
 
     try {
-        const newProduct = await addProduct(req.body)
+        const newProduct = req.body
+        newProduct.img = req.file.filename //Agregar el nombre de la imagen al objeto req.body
+
+        const createdProduct = await addProduct(newProduct)
         // res.status(200).json({message: 'Product Created', Product: newProduct})
         res.render('product', newProduct);
     } catch (error) {
