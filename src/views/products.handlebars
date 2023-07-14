@@ -1,32 +1,45 @@
-html
 <style>
   .card {
-    max-width: 300px; /* Ajusta este valor según tus necesidades */
+    max-width: 300px;
+    /* Ajusta este valor según tus necesidades */
   }
    .card-body {
-    font-size: 14px; /* Ajusta este valor según tus necesidades */
+    font-size: 14px;
+    min-height: 200px;
+    /* Ajusta este valor según tus necesidades */
   }
+   .buy-button-container {
+    display: flex;
+    justify-content: center;
+  }
+  
 </style>
- <div class="card-deck">
+ <div class="card-deck m-3">
   {{#each products}}
   <div class="card mb-4 shadow-lg">
-    <div class="row no-gutters">
+    <div class="row no-gutters ">
       <div class="col-7">
-        <div class="card-body">
-          <h5 class="card-title mb-3" style="color: #333;">{{title}}</h5>
-          <p class="card-text" style="color: #555;">{{description}}</p>
-          <p class="card-text" style="color: #555;">Precio: ${{price}}</p>
-          <p class="card-text" style="color: #555;">Stock: {{stock}}</p>
+        <div class="card-body ">
+          <a style="text-decoration: none; color: inherit;" href="http://localhost:8080/products/{{_id}}" target="_blank" rel="noopener noreferrer">
+            <h5 class="card-title mb-3" style="color: #333;">{{title}}</h5>
+            <p class="card-text" style="color: #555;">{{description}}</p>
+            <p class="card-text" style="color: #555;">Precio: ${{price}}</p>
+            <p class="card-text" style="color: #555;">Stock: {{stock}}</p>
+          </a>
         </div>
       </div>
-      <div class="col-5 d-flex align-items-center">
-        <img src="/uploads/{{img}}" alt="imagen" class="card-img" style="width: 100%; height: auto;">
+      <div class="col-4 d-flex align-items-center">
+        <a href="http://localhost:8080/products/{{_id}}" target="_blank" rel="noopener noreferrer">
+          <img src="/uploads/{{img}}" alt="imagen" class="card-img" style="width: 100%; height: auto;">
+        </a>
       </div>
     </div>
-    <div class="col-12 mb-3">
+    <div class="col-12 mb-3 mt-3 ">
       <form id="addToCartForm-{{_id}}" action="/carts" method="POST">
         <input type="hidden" name="productId" value="{{_id}}">
-        <button type="submit" class="btn btn-primary w-100 text-center">Comprar</button>
+        <div class="buy-button-container">
+          <button type="submit" class="btn btn-primary w-100 text-center">Comprar</button>
+        </div>
       </form>
     </div>
   </div>

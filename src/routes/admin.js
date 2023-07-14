@@ -3,6 +3,7 @@ import { admin } from "../controllers/admin.contollers.js";
 
 const router = Router()
 
+
 router.get('/', admin)
 
 

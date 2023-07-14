@@ -1,0 +1,37 @@
+<style>
+  textarea {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px;
+  }
+</style>
+ <body>
+  <header class="bg-primary text-white text-center py-5">
+    <h1>Nosotros</h1>
+  </header>
+  <main class="container mt-5">
+    <form action="/nosotros/admin" id="nuestroForm" method="POST">
+      {{#each nosotros}}
+      <section>
+        <h2>Nuestros Productos</h2>
+        <textarea name="parrafo1" placeholder="Párrafo 1">{{parrafo1}}</textarea>
+        <textarea name="parrafo2" placeholder="Párrafo 2">{{parrafo2}}</textarea>
+        <textarea name="parrafo3" placeholder="Párrafo 3">{{parrafo3}}</textarea>
+        <textarea name="parrafo4" placeholder="Párrafo 4">{{parrafo4}}</textarea>
+      </section>
+      <section>
+        <h2>Nuestro Equipo</h2>
+        <input type="text" name="equipo" placeholder="Nombre" value="{{equipo}}">
+      </section>
+      <section>
+        <h2>Nuestra Misión</h2>
+        <textarea name="mision" placeholder="Párrafo">{{mision}}</textarea>
+      </section>
+      <button type="submit">Actualizar</button>
+      {{/each}}
+    </form>
+  </main>
+  <footer class="bg-dark text-white text-center py-3 mt-5">
+    <p>© 2022 Nuestra Empresa. Todos los derechos reservados.</p>
+  </footer>
+</body>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
@@ -7,22 +8,30 @@
       margin: 0;
       padding: 0;
     }
+
+
+
     .admin-panel {
+      height: 100%;
       margin-top: 30px;
       padding: 20px;
-      background-color: #f8f9fa;
+      background-color: #e9ebec;
     }
+
     .admin-panel h2 {
       margin-bottom: 20px;
     }
+
     .admin-panel ul {
       list-style-type: none;
       padding: 0;
       margin: 0;
     }
+
     .admin-panel ul li {
       margin-bottom: 10px;
     }
+
     .admin-panel ul li a {
       display: block;
       padding: 10px;
@@ -30,29 +39,36 @@
       border-radius: 4px;
       text-decoration: none;
     }
+
     .admin-panel ul li a:hover {
       background-color: #e9ecef;
     }
+
     .admin-panel .col {
       padding: 0;
     }
+
     .content {
       padding: 20px;
     }
+
     /* Responsive Styles */
     @media (max-width: 768px) {
       .row {
         flex-direction: column;
       }
-      .col-2, .col-9 {
+
+      .col-2,
+      .col-9 {
         width: 100%;
       }
     }
   </style>
 </head>
+
 <body>
   <div class="container-fluid">
-    <div class="row">
+    <div class="row admin">
       <div class="col-2">
         <div class="admin-panel">
           <h2>Panel de Administración</h2>
@@ -69,21 +85,32 @@
           <ul>
             <li><a href="/actualizar-inicio" class="nav-link-admin">Actualizar</a></li>
           </ul>
+          <h4>Nosotros</h4>
+          <ul>
+            <li><a href="/nosotros/Admin" class="nav-link-admin">Crear</a></li>
+            <li><a href="/nosotros/Admin/update" class="nav-link-admin">Actualizar</a></li>
+
+          </ul>
         </div>
       </div>
       <div class="col-9">
         <div class="content" id="content">
+          <div id="panel" class="admin-panel">
+            <h2 class="mb-3">Bienvenido al Panel de Administrador</h2>
+            <p>¡Hola {{user}}! Gracias por acceder al panel de administración.</p>
+            <p>Aquí podrás gestionar y controlar diversas funcionalidades del sitio.</p>
+          </div>
           <!-- Aquí se cargará el contenido de las rutas -->
         </div>
       </div>
     </div>
   </div>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const links = document.querySelectorAll('.nav-link-admin');
       const contentContainer = document.getElementById('content');
-      links.forEach(function(link) {
-        link.addEventListener('click', function(e) {
+      links.forEach(function (link) {
+        link.addEventListener('click', function (e) {
           e.preventDefault();
           const url = this.getAttribute('href');
           loadContent(url);
@@ -91,20 +118,21 @@
       });
       function loadContent(url) {
         fetch(url)
-          .then(function(response) {
+          .then(function (response) {
             if (response.ok) {
               return response.text();
             }
             throw new Error('Error al cargar el contenido.');
           })
-          .then(function(data) {
+          .then(function (data) {
             contentContainer.innerHTML = data;
           })
-          .catch(function(error) {
+          .catch(function (error) {
             contentContainer.innerHTML = '<p>Error al cargar el contenido.</p>';
           });
       }
     });
   </script>
 </body>
+
 </html>

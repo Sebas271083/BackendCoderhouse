@@ -9,6 +9,7 @@ import loginRouter from './routes/login.router.js'
 import usuariosRouter from './routes/usuarios.router.js'
 import ticketsRouter from './routes/tickets.routes.js'
 import contactRouter from './routes/contacts.router.js'
+import nosotrosRouter from './routes/nosotros.js'
 import session from 'express-session'
 import MongoStore from 'connect-mongo';
 import handlebars from 'express-handlebars'
@@ -69,6 +70,9 @@ app.use('/login', loginRouter)
 app.use('/usuarios', usuariosRouter)
 app.use('/tickets', ticketsRouter)
 app.use('/contacts', contactRouter)
+app.use('/nosotros', nosotrosRouter)
+
+
 
 
 //Configuracion motor de plantillas

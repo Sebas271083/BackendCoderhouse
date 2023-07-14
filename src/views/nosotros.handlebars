@@ -1,0 +1,31 @@
+<body>
+  <header class="bg-primary text-white text-center py-5">
+    <h1>Nosotros</h1>
+  </header>
+  <main class="container mt-5">
+      {{#each nosotros}}
+    <section>
+      <h2>Nuestros Productos</h2>
+      <p>{{parrafo1}}</p>
+      <p>{{parrafo2}}</p>
+      <p>{{parrafo3}}</p>
+      <p>{{parrafo4}}</p>
+    </section>
+    <section>
+      <h2>Nuestro Equipo</h2>
+      <ul class="list-group">
+        <li>{{equipo}}</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Nuestra Misión</h2>
+      <p>{{mision}}</p>
+    </section>
+    {{/each}}
+  </main>
+  <footer class="bg-dark text-white text-center py-3 mt-5">
+    <p>© 2022 Nuestra Empresa. Todos los derechos reservados.</p>
+  </footer>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="scripts.js"></script>
+</body>

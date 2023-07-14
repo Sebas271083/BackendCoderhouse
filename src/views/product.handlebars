@@ -1,20 +1,24 @@
-
-
-<div id="content-to-load" class="content-to-load"> 
+<div id="content-to-load" class="content-to-load">
   <h1 class="text-center mb-4 mt-3" style="color: #333;">Producto</h1>
 
   <div class="row">
-      <div class=" col-md-4">
-        <div class="card mb-4 shadow-lg ml-3" style="border: none;">
-          <div class="card-body">
-            <h5 class="card-title text-center mb-3" style="color: #333;">{{title}}</h5>
-            <p class="card-text" style="color: #555;">{{description}}</p>
-            <p class="card-text" style="color: #555;">Precio: ${{price}}</p>
-            <p class="card-text" style="color: #555;">Stock: {{stock}}</p>
-            <img src="/uploads/{{img}}" alt="imagen {{img}}">
-            <a href="#" class="btn btn-primary col-12">Comprar</a>
+    <div class=" col-md-4">
+      <div class="card mb-4 shadow-lg ml-3" style="border: none;">
+        <div class="card-body">
+          <h5 class="card-title text-center mb-3" style="color: #333;">{{title}}</h5>
+          <p class="card-text" style="color: #555;">{{description}}</p>
+          <p class="card-text" style="color: #555;">Precio: ${{price}}</p>
+          <p class="card-text" style="color: #555;">Stock: {{stock}}</p>
+          <div style="text-align:center" class="mb-3">
+          <img src="/uploads/{{img}}" alt="imagen {{img}}" style="max-width: 200px; max-height: 200px;">
+          </div>
+          <div class="col-12 mb-3">
+            <form id="addToCartForm-{{_id}}" action="/carts" method="POST">
+              <input type="hidden" name="productId" value="{{_id}}">
+              <button type="submit" class="btn btn-primary w-100 text-center">Comprar</button>
+            </form>
           </div>
         </div>
       </div>
+    </div>
   </div>
-</div>
