@@ -79,7 +79,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Confirmar</button>
+        <button type="button" class="btn btn-primary" onclick="finalizarCompra()">Confirmar</button>
       </div>
     </div>
   </div>
@@ -134,5 +134,11 @@
     } catch (error) {
       console.error('Error en la solicitud DELETE:', error);
     }
+  }
+
+
+  function finalizarCompra() {
+    window.location.href = 'http://localhost:8080/carts/finalizarCompra'
+
   }
 </script>

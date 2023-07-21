@@ -9,7 +9,7 @@ router.get('/', findAllNosotros)
 router.get('/admin', getUpdate)
 
 router.get('/admin/update/', findAllNosotrosUpdate)
-router.put('/admin/update/:id', updateN)
+router.put('/admin/updatePut/', updateN)
 
 router.post('/admin', addNosotrosAll)
 

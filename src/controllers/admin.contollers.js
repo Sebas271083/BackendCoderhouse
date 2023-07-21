@@ -10,7 +10,8 @@ export const admin = async(req, res)=>{
             res.send("Usuario no autorizado")
         }
     } catch (error) {
-        res.send("Usuario expiro")
+        const err = {error: "Iniciar sesion - Usuario expiro"}
+        res.render('login', {err})
         console.log(error)
     }
 }

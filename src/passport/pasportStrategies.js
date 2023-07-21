@@ -11,23 +11,30 @@ passport.use('local', new LocalStrategy(
     {
         usernameField: 'email',
     }, async (email, password, done) => {
-        const user = await usersModel.findOne({ email })
-        if (!user) {
-            return done(null, false)
-        }
-        const isPassword = await compareData(password, user.password)
-        if (!isPassword) {
-            return done(null, false)
-        }
-        console.log(user.email)
-        // Verificar el perfil del usuario
-        if (user.isAdmin) {
-            user.profile = 'admin';
-        } else {
-            user.profile = 'user';
+        try {
+            const user = await usersModel.findOne({ email })
+            if (!user) {
+                console.log("doness " + done)
+                return done(null, false, { message: 'El usuario no existe' })
+            }
+            const isPassword = await compareData(password, user.password)
+            if (!isPassword) {        
+                return done(null, false, { message: 'Contraseña incorrecta' })
+            }
+            // Verificar el perfil del usuario
+            if (user.isAdmin) {
+                user.profile = 'admin';
+            } else {
+                user.profile = 'user';
+            }
+    
+            done(null, user)
+            
+        } catch (error) {
+            console.log(error)
+            done(error) // Enviar el error al middleware de Passport
         }
 
-        done(null, user)
     }
 ))
 

@@ -12,15 +12,14 @@ export const getNosotros = async()=>{
     }
 }
 
-
-export const updateNosotros = async(id, obj)=>{
+export const updateNosotros = async (obj) => {
     try {
-        const nosotrosUpdate = await nostrosManager.updateUserAdmin(id, obj)
-        return nosotrosUpdate
+      const nosotrosUpdate = await nostrosManager.updateNosotros(obj);
+      return nosotrosUpdate;
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
-}
+  };
 
 export const addNosotros = async(obj)=>{
     try {

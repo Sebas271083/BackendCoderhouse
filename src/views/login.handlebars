@@ -2,8 +2,24 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="card">
+        <div>
+        </div>
         <div class="card-body">
           <h1 class="card-title text-center">Iniciar sesión</h1>
+          {{#if err}}
+          <div class="alert alert-danger">
+            <ul>
+              <li>{{err.error}}</li>
+            </ul>
+          </div>
+          {{/if}}
+          {{#if errorMessage}}
+          <div class="alert alert-danger">
+            <ul>
+              <li>{{errorMessage}}</li>
+            </ul>
+          </div>
+          {{/if}}
           <form action="/login" method="POST">
             <div class="form-group">
               <label for="email">Correo electrónico:</label>
@@ -28,7 +44,8 @@
   <div class="row justify-content-center mt-3">
     <div class="col-md-6 text-center">
       <button onclick="location.href='/login/google'" class="btn btn-primary btn-google">
-        <img  style="width: 30px;" src="https://img2.freepng.es/20180416/xlq/kisspng-g-suite-pearl-river-middle-school-google-software-sign-up-button-5ad4e1a9d11d62.1599053415239008418566.jpg"
+        <img style="width: 30px;"
+          src="https://img2.freepng.es/20180416/xlq/kisspng-g-suite-pearl-river-middle-school-google-software-sign-up-button-5ad4e1a9d11d62.1599053415239008418566.jpg"
           alt="Google Icon" class="btn-google-icon">
         Iniciar sesión con Google
       </button>

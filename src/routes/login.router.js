@@ -1,49 +1,28 @@
 import { Router } from "express";
+import { getLogin, getSignup, loginUser, logout, postSignup } from "../controllers/login.controllers.js";
+import { check } from "express-validator";
 import passport from "passport";
 
 
 const router = Router()
 
 
-router.get('/', async (req, res) => {
-    try {
-        // if (req.session.id) {
-        //     res.redirect('/login/bienvenida')
-        //     return
-        // }
+router.get('/', getLogin)
 
-        res.render('login')
-    } catch (error) {
-        console.log(error)
-    }
-})
+router.post('/', passport.authenticate('local'), loginUser)
 
-router.post('/', passport.authenticate('local'), (req, res) => {
-    const { email, password } = req.body
-    req.session['email'] = email
-    req.session['password'] = password
-    req.session['logged'] = true
-    res.redirect('/products')
-})
-
-router.get('/signup', (req, res) => {
-    res.render('signup')
-})
+router.get('/signup', getSignup)
 
 
-router.get('/logout', (req, res) => {
-    req.logout(function (err) {
-        if (err) {
-            // Manejo del error
-            return res.status(500).json({ message: 'Error al cerrar sesión' });
-        }
-        // La sesión se ha destruido correctamente
-        res.redirect('/login'); // Redirige al usuario a la página de inicio de sesión
-    });
-});
+router.get('/logout', logout);
 
-
-router.post('/signup', passport.authenticate('signup', { successRedirect: './signupSucc' }))
+router.post('/signup', [
+    check('first_name').notEmpty().withMessage('El nombre es obligatorio'),
+    check('last_name').notEmpty().withMessage('El apellido es obligatorio'),
+    check('password').isLength({ min: 4 }).withMessage('La contraseña debe tener al menos 4 caracteres')
+        .matches(/\d/).withMessage('La contraseña debe contener al menos un número'),
+    check('email').isEmail().withMessage('El correo electrónico debe tener un formato válido')
+], postSignup);
 
 router.get('/signupGithub', passport.authenticate('github', { scope: ['user:email'] }))
 router.get('/github', passport.authenticate('github'), (req, res) => {

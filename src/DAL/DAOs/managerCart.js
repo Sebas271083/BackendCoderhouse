@@ -98,13 +98,8 @@ export class ManagerCart {
     }
 
   }
-  
-  
-  
-  
 
 }
 
 
-//HAcer update para poder pasarlo al router de post
 

@@ -10,10 +10,10 @@
     <h1>Nosotros</h1>
   </header>
   <main class="container mt-5">
-    <form action="/nosotros/admin" id="nuestroForm" method="POST">
+    <form action="/nosotros/admin/updatePut?_method=PUT" id="nuestroForm" method="POST">
       {{#each nosotros}}
       <section>
-        <h2>Nuestros Productos</h2>
+        <h2>Nuestra Historia</h2>
         <textarea name="parrafo1" placeholder="Párrafo 1">{{parrafo1}}</textarea>
         <textarea name="parrafo2" placeholder="Párrafo 2">{{parrafo2}}</textarea>
         <textarea name="parrafo3" placeholder="Párrafo 3">{{parrafo3}}</textarea>

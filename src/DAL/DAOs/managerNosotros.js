@@ -23,22 +23,18 @@ export class NosotrosManager {
   }
 
 
-
-  async updateNosotros(id, obj) {
+  async updateNosotros(obj) {
     try {
-      // Actualiza el usuario con el nuevo token
-      const updatedNosotros = await nosotrosModel.findByIdAndUpdate(id, obj, { new: true });
-
-      if (!updatedUser) {
-        throw new Error('No se encontró ningún detalle  con el Id proporcionado');
-      }
-
-      console.log(updatedNosotros);
+      // Actualiza todos los documentos de la colección con los datos proporcionados
+      const updatedNosotros = await nosotrosModel.updateMany({}, obj, { new: true });
+       console.log(updatedNosotros);
       return updatedNosotros;
     } catch (error) {
       console.log(error);
     }
   };
+
+  
 
   
   async updateNosotrosAdmin(id, obj) {
